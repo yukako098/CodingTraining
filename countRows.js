@@ -30,6 +30,21 @@ function gridSize(){
     return "" + row + " x " + col;
 }
 
-//gridSize();
+function totalCells(){
+    var row = countRows();
+    var col = countColumns();
+    var total = row * col;
+    return "" + total;
+  }
+  
+  function convertColumn(coordinates){
+    var colAlpha = coordinates.substr(0, 1);
+    var alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    for(var i = 0; i < alpha.length; i++){
+      if(alpha[i] == colAlpha){
+        return i;
+      }
+    }
+  }
 
-console.log(gridSize());
+  convertColumn('C4');
