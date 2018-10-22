@@ -1,27 +1,59 @@
-function repeatedString(s, n) {
-    var str = "";
-    var i = 0;
-    var counter = 0;
-    if(s == 'a'){
-        return n;
-    }
-    while(str.length != n - s.length){
-        str = str.concat(s.substring(i, i+1));
-        if(i == s.length){
-            i = 0;
-        } else {
-            i++;
-        }
+'use strict';
 
-    }
-    s = s + str;
-    for(var i = 0; i < s.length; i++){
-        if(s[i] == 'a'){
-            counter += 1;
-        }
-    }
-    return counter;
+const fs = require('fs');
+
+process.stdin.resume();
+process.stdin.setEncoding('utf-8');
+
+let inputString = '';
+let currentLine = 0;
+
+process.stdin.on('data', inputStdin => {
+    inputString += inputStdin;
+});
+
+process.stdin.on('end', _ => {
+    inputString = inputString.replace(/\s*$/, '')
+        .split('\n')
+        .map(str => str.replace(/\s*$/, ''));
+
+    main();
+});
+
+function readLine() {
+    return inputString[currentLine++];
 }
 
+// Complete the repeatedString function below.
+function repeatedString(s, n) {
+var manyS = parseInt(n / s.length); 
+   var restString = n - (s.length * manyS);
+   var aCounter = 0
+   var aCounter2 = 0
+   for(var i = 0; i < s.length; i++){
+       if(s[i] == 'a'){
+        aCounter += 1;
+       }
+    }
+    for(var i = 0; i < restString; i++){
+        if(s[i] == 'a'){
+            aCounter2 += 1;
+        }
+    }
+    var totalA = aCounter * manyS + aCounter2;
+    return  totalA;
+}
 
-console.log(repeatedString("beeaabc", 711560125001));
+function main() {
+    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
+
+    const s = readLine();
+
+    const n = parseInt(readLine(), 10);
+
+    let result = repeatedString(s, n);
+
+    ws.write(result + "\n");
+
+    ws.end();
+}

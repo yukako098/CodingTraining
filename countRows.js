@@ -50,7 +50,7 @@ function lightCell(coordinates){
   var convertCol =  convertColumn(coordinates);
   var col = countColumns();
   var row = coordinates.substr(1, 2);
-  var convertRow = parseInt(row) -1;
+  //var convertRow = parseInt(row) -1;
   if(convertCol > col){
     return false;
   }
@@ -132,4 +132,28 @@ function firstRock(){
   return rocks[0];
 }
 
-console.log(firstRock());
+function firstCurrent(){
+  var currents = allCurrents();
+  return currents[0];
+}
+
+function shipReport(){
+  var ships = allShips();
+  var shipsArr = new Array();
+  shipsArr.push(ships[0]);
+  shipsArr.push(ships[ships.length-1]);
+  return shipsArr;
+}
+
+function howDangerous(coordinates){
+  var col = convertColumn(coordinates);
+  var row = coordinates.substr(1, 2);
+  var convertRow = parseInt(row) -1;
+  if(GRID[convertRow][col] == '~'){
+    return 50;
+  } else if (GRID[convertRow][col] == '^'){
+    return 100;
+  }
+}
+
+console.log(howDangerous('E2'));
