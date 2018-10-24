@@ -156,4 +156,18 @@ function howDangerous(coordinates){
   }
 }
 
-console.log(howDangerous('E2'));
+function percentageReport(){
+  var rocks = allRocks();
+  var currents = allCurrents();
+  var row = countRows();
+  var col = countColumns();
+  var total = row * col;
+  var rocksRate = rocks.length / total * 100.00;
+  var currentsRate = currents.length / total * 100.00;
+  var ratesArr = [];
+  ratesArr.push(rocksRate.toFixed(2));
+  ratesArr.push(currentsRate.toFixed(2));
+  return ratesArr;
+}
+
+console.log(percentageReport());
