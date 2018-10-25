@@ -153,6 +153,8 @@ function howDangerous(coordinates){
     return 50;
   } else if (GRID[convertRow][col] == '^'){
     return 100;
+  } else {
+    return 0;
   }
 }
 
@@ -170,4 +172,14 @@ function percentageReport(){
   return ratesArr;
 }
 
-console.log(percentageReport());
+function safetyReport(){
+  var row1 = coordinates.substr(1, 2);
+  row1 = parseInt(row1)
+  var map = GRID.map( function(row) {
+    return row.map( function(cell) {
+      return howDangerous(coordinates);
+    })
+  })
+  return map;
+}
+console.log(safetyReport());
