@@ -183,11 +183,13 @@ function convertRow(coordinates){
 }
 
 function calcDistance(value1, value2){
-  var x = convertColumn(value1) - convertColumn(value2);
-  var y = convertRow(value1) - convertRow(value2);
-  var distance = Math.sqrt( x*x + y*y );
+  value1x = convertColumn(value1);
+  value1y = convertRow(value1);
+
+  value2x = convertColumn(value2);
+  value2y = convertRow(value2);
+  
+  var distance = Math.sqrt(Math.pow((value2x - value1x), 2) + Math.pow((value2y - value1y), 2)).toFixed(2);
   
   return distance
 }
-
-console.log(calcDistance('A3', 'G5'));
