@@ -146,12 +146,9 @@ function shipReport(){
 }
 
 function howDangerous(coordinates){
-  var col = convertColumn(coordinates);
-  var row = coordinates.substr(1, 2);
-  var convertRow = parseInt(row) -1;
-  if(GRID[convertRow][col] == '~'){
+  if(coordinates == '~'){
     return 50;
-  } else if (GRID[convertRow][col] == '^'){
+  } else if (coordinates == '^'){
     return 100;
   } else {
     return 0;
@@ -173,13 +170,24 @@ function percentageReport(){
 }
 
 function safetyReport(){
-  var row1 = coordinates.substr(1, 2);
-  row1 = parseInt(row1)
-  var map = GRID.map( function(row) {
-    return row.map( function(cell) {
-      return howDangerous(coordinates);
+  var safetyGrid = GRID.map(row => {
+    return row.map(column => howDangerous(column));
     })
-  })
-  return map;
+    return safetyGrid;
 }
-console.log(safetyReport());
+
+function convertRow(coordinates){
+  var rowNum = coordinates.substr(1, 2);
+  rowNum = parseInt(rowNum);
+  return rowNum;
+}
+
+function calcDistance(value1, value2){
+  var x = convertColumn(value1) - convertColumn(value2);
+  var y = convertRow(value1) - convertRow(value2);
+  var distance = Math.sqrt( x*x + y*y );
+  
+  return distance
+}
+
+console.log(calcDistance('A3', 'G5'));
