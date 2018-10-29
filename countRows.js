@@ -193,3 +193,6 @@ function calcDistance(value1, value2){
   
   return distance
 }
+
+
+
